@@ -1,0 +1,88 @@
+.main-todo-div {
+  display: flex;
+  border: solid 1px transparent;
+  border-radius: 7px;
+  height: 56vh;
+  box-shadow: 0px 3px 8px 1px #0000001c;
+  width: 80%;
+}
+
+.todo-left-div {
+  overflow: scroll;
+  text-align: left;
+  font-weight: 700;
+  flex: 1;
+  overflow-x: hidden;
+}
+
+.todo-left-title-div p {
+  padding: 15px 0px;
+}
+
+.todo-left-title-div {
+  background-color: #f2f2f2;
+}
+.todo-left-title-div :hover {
+  background-color: #f2f2f2;
+}
+
+.todo-left-title-div p {
+  border-bottom: solid 1px #f2f2f2;
+  margin: 0px;
+  padding-left: 23px;
+}
+.todo-left-title-div p.title {
+    line-height: 1.5;
+  }
+.todo-left-title-div-two p {
+  padding: 15px 0px;
+}
+.todo-left-title-div-two p.title {
+    line-height: 1.5;
+  }
+
+.todo-left-title-div-two :hover {
+  background-color: #f2f2f2;
+}
+
+.todo-left-title-div-two p {
+  border-bottom: solid 1px #f2f2f2;
+  margin: 0px;
+  padding-left: 23px;
+}
+
+
+.todo-right-div {
+    flex: 1 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+}
+
+.todo-right-sub-div {
+    width: 75%;
+}
+.todo-right-sub-div div p.title {
+    line-height: 1.7;
+}
+.btn-div {
+  display: flex;
+  justify-content: center;
+  column-gap: 15px;
+}
+
+button {
+  padding: 9px 20px;
+  border-radius: 8px;
+  border: transparent;
+  color: white;
+}
+
+.del-btn {
+  background-color: #f54c4d;
+}
+
+.complete-btn {
+  background-color: #288a00;
+}
