@@ -7,6 +7,7 @@ export default function ToDo() {
   const [toDoData, setToDoData] = useState([]);
   const [toDoDataRight, setToDoDataRight] = useState([]);
   const [todoId, setToDoId] = useState(1);
+  const [completedTask,setCompletedTask]= useState([])
   useEffect(() => {
     axios
       .get("https://jsonplaceholder.typicode.com/todos")
@@ -24,6 +25,18 @@ export default function ToDo() {
         setToDoDataRight(response.data);
       });
   }
+
+  function completeTask(id) {
+    axios
+      .patch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+        body: { ...toDoDataRight, completed: true },
+      })
+      .then((res) => {
+setCompletedTask(res.data.body)
+        console.log(res.data.body, "delres");
+        console.log(completedTask,"comm")
+      });
+  }
   const todoListMap = toDoData.map((data) => {
     return (
       <div
@@ -34,13 +47,15 @@ export default function ToDo() {
         }
         onClick={() => {
           setToDoId(data.id);
-          console.log(todoId, "iddd");
+ 
         }}
       >
         <p className="title">{data.title}</p>
       </div>
     );
   });
+
+  
   return (
     <div className="main-todo-div">
       <div className="todo-left-div">
@@ -61,7 +76,11 @@ export default function ToDo() {
 
           <div className="btn-div">
             <button className="del-btn">Delete</button>
-            <button className="complete-btn">Complete</button>
+            <button className="complete-btn" onClick={()=>{
+                completeTask(todoId)
+            }}>
+              {toDoDataRight.completed==true ? "Completed" :"Complete"}
+            </button>
           </div>
         </div>
       </div>
