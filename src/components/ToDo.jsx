@@ -7,12 +7,15 @@ export default function ToDo() {
   const [toDoData, setToDoData] = useState([]);
   const [toDoDataRight, setToDoDataRight] = useState([]);
   const [todoId, setToDoId] = useState(1);
-  const [completedTask,setCompletedTask]= useState([])
+  const [completedTask, setCompletedTask] = useState([]);
   useEffect(() => {
     axios
       .get("https://jsonplaceholder.typicode.com/todos")
       .then(function (response) {
         setToDoData(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
 
     getSingleListData(todoId);
@@ -23,6 +26,9 @@ export default function ToDo() {
       .get(`https://jsonplaceholder.typicode.com/todos/${id}`)
       .then(function (response) {
         setToDoDataRight(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
@@ -32,9 +38,23 @@ export default function ToDo() {
         body: { ...toDoDataRight, completed: true },
       })
       .then((res) => {
-setCompletedTask(res.data.body)
+        setCompletedTask(res.data.body);
         console.log(res.data.body, "delres");
-        console.log(completedTask,"comm")
+        console.log(completedTask, "comm");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function delTask(id) {
+    axios
+      .delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      .then((res) => {
+        console.log(res, "Delres");
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
   const todoListMap = toDoData.map((data) => {
@@ -47,7 +67,6 @@ setCompletedTask(res.data.body)
         }
         onClick={() => {
           setToDoId(data.id);
- 
         }}
       >
         <p className="title">{data.title}</p>
@@ -55,7 +74,6 @@ setCompletedTask(res.data.body)
     );
   });
 
-  
   return (
     <div className="main-todo-div">
       <div className="todo-left-div">
@@ -75,11 +93,21 @@ setCompletedTask(res.data.body)
           </div>
 
           <div className="btn-div">
-            <button className="del-btn">Delete</button>
-            <button className="complete-btn" onClick={()=>{
-                completeTask(todoId)
-            }}>
-              {toDoDataRight.completed==true ? "Completed" :"Complete"}
+            <button
+              className="del-btn"
+              onClick={() => {
+                delTask(toDoDataRight.id);
+              }}
+            >
+              Delete
+            </button>
+            <button
+              className="complete-btn"
+              onClick={() => {
+                completeTask(todoId);
+              }}
+            >
+              {toDoDataRight.completed == true ? "Completed" : "Complete"}
             </button>
           </div>
         </div>
