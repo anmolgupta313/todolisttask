@@ -13,6 +13,7 @@
   font-weight: 700;
   flex: 1;
   overflow-x: hidden;
+  border-right: solid 1px #f2f2f2;
 }
 
 .todo-left-title-div p {
@@ -87,4 +88,15 @@ button {
 
 .complete-btn {
   background-color: #288a00;
+}
+
+
+@media (max-width: 786px) {
+  .main-todo-div{
+    flex-direction: column;
+  }
+  .todo-left-div{
+    border-bottom: solid 1px #f2f2f2;
+    border-right: none;
+  }
 }
